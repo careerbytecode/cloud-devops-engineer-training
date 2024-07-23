@@ -14,7 +14,7 @@ kubectl create ns daemonset
 ```
 ## 2 .Create a nginux demonset
 ```
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/5-Daemonset/daemonset-nginx.yaml -n daemonset
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/5-Daemonset/daemonset-nginx.yaml -n daemonset
 ```
 
 ```
