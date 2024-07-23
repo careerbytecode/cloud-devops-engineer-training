@@ -1,4 +1,4 @@
-Pre-Req
+# Step1 
 
 Create a Azure VM with the  ubuntu 22.04 image 
 
@@ -37,70 +37,44 @@ docker --version
 ```
 
 ********************************************************
+# Step 2 
 
-Step 1 -  Configure AZURE CLI in any linux machine
-
-- reference - https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=dnf#install-azure-cli
-```
-sudo dnf install -y https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm
-```
+Get packages needed for the installation process:
 
 ```
-sudo dnf install azure-cli
+sudo apt-get update
+sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release
 ```
+Download and install the Microsoft signing key:
 
 ```
-az login
+sudo mkdir -p /etc/apt/keyrings
+curl -sLS https://packages.microsoft.com/keys/microsoft.asc |
+  gpg --dearmor | sudo tee /etc/apt/keyrings/microsoft.gpg > /dev/null
+sudo chmod go+r /etc/apt/keyrings/microsoft.gpg
 ```
 
-Now your linux machine has been fully authenticated with AZURE login.
-
-
-****************************************************************
-Step 2 - first install docker in the local linux machine
+Add the Azure CLI software repository:
 
 ```
- yum install epel-release -y
- yum repolist
+AZ_DIST=$(lsb_release -cs)
+echo "Types: deb
+URIs: https://packages.microsoft.com/repos/azure-cli/
+Suites: ${AZ_DIST}
+Components: main
+Architectures: $(dpkg --print-architecture)
+Signed-by: /etc/apt/keyrings/microsoft.gpg" | sudo tee /etc/apt/sources.list.d/azure-cli.sources
 ```
-#Add the stable Docker repository by typing:
-```
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-```
-
-#Now that we have Docker repository enabled, we can install the latest version of Docker CE (Community Edition) using yum by typing:
-```
-yum install docker-ce -y
-```
-
-
-#Once the Docker package is installed, we start the Docker daemon with:
-```
-systemctl start docker
-```
-#To verify that the Docker service is running type:
-```
-systemctl status docker
-```
-#Enable the Docker service to be automatically started at boot time:
-```
-systemctl enable docker
-```
-#At the time of the writing of this article, the current stable version of Docker is 18.03.1, we can check our Docker version by typing:
-```
-sudo gpasswd -a <username> docker
-```
+Update repository information and install the azure-cli package:
 
 ```
-docker -v
-```
-```
-docker info
+sudo apt-get update
+sudo apt-get install azure-cli
 ```
 
 ********************************************************************************************************
 
-Step 3 - Azure Container Registry
+# Step 3 - Azure Container Registry
 
 Creating an Azure Container Registry (ACR) Instance
 ```
