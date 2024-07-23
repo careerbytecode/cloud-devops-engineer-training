@@ -1,19 +1,36 @@
-Pre-Requisities: 
+Pre-Req
 
-You need to have basic idea on how to create custom docker image and how to push it to Docker Repository
+Create a Azure VM with the  ubuntu 22.04 image 
 
-Before Learn Azure Container Instance handson,learn the manual docker container hands on lab.
+Docker Installation in UBUNTU 22.04
 
-Class13
+```
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
 
-- Docker Hands-on Lab
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-https://youtu.be/qxHHPOYKDfQ
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+   
+sudo apt-get update
 
+sudo apt-get install docker-ce docker-ce-cli containerd.io
 
-- Docker-Container-Manual-Lab-Commands-Guide
+sudo systemctl start docker
 
-- https://github.com/cloudnloud/azure-training/tree/main/Class13-Docker-Container-Manual-Lab
+sudo systemctl enable docker
+
+sudo gpasswd -a rangarajbk_db docker
+```
+
 
 ********************************************************
 
