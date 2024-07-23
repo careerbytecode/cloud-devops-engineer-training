@@ -72,6 +72,15 @@ sudo apt-get update
 sudo apt-get install azure-cli
 ```
 
+```
+Az login -t <tenant-id>
+```
+
+for testing please issue the below command 
+
+```
+az group create --name DevResourceGroup --location eastus
+```
 ********************************************************************************************************
 
 # Step 3 - Azure Container Registry
