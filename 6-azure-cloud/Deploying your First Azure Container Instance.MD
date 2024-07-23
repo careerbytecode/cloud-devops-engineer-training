@@ -30,7 +30,7 @@ sudo systemctl enable docker
 
 sudo gpasswd -a rangarajbk docker
 ```
-
+# To check the dcoker information and Version
 ```
 docker info
 docker --version
