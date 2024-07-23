@@ -23,7 +23,7 @@ kubectl create ns app1
 ```
 ## 2 . Create a node server
 ```
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/6-initcontainers/node-redis/node.yml -n app1
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/6-initcontainers/node-redis/node.yml -n app1
 ```
 
 - first deploy above yaml file and run below command
@@ -37,7 +37,7 @@ kubectl get all -n app1 -o wide
 ## 3 . Create a Redis database  
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/6-initcontainers/node-redis/redis.yml -n app1
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/6-initcontainers/node-redis/redis.yml -n app1
 ```
 
 - now immdietly riun below command
