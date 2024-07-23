@@ -900,7 +900,7 @@ Step 18. singleurl and multipleurl check using the roles
 ## 7:  Folder Structure ?
 **Ansible roles Directory Structure**
 
-![ScreenShot](https://github.com/rangarajbk/cloud-devops-engineer-training/blob/main/3-ansible/Ansible-Roles-Structure.png)
+![ScreenShot](https://github.com/careerbytecode/cloud-devops-engineer-training/blob/main/3-ansible/Ansible-Roles-Structure.png)
 
 To start this handson lab,you need following resources.
 
@@ -999,7 +999,7 @@ become_ask_pass=False
 
 ## scenario 3: single url test
 
-![ScreenShot](https://github.com/rangarajbk/cloud-devops-engineer-training/blob/main/3-ansible/multi-url.JPG)
+![ScreenShot](https://github.com/careerbytecode/cloud-devops-engineer-training/blob/main/3-ansible/multi-url.JPG)
 
 - single url is just dummy skeleton
 
