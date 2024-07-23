@@ -1,1 +1,1 @@
-# Kubernetes_Admin_Training
+# Azure Admin training
