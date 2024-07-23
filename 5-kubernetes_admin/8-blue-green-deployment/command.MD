@@ -12,13 +12,13 @@ kubectl create ns bgdeploy
 
 - now we will deploy v1 application which blue
 ```
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/8-blue-green-deployment/blue-deployment.yml -n bgdeploy
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/8-blue-green-deployment/blue-deployment.yml -n bgdeploy
 ```
 
 ## 3. Deploy the green  application
 - now we will deploy v2 application which green
 ```
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/8-blue-green-deployment/green-deployment.yml -n bgdeploy
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/8-blue-green-deployment/green-deployment.yml -n bgdeploy
 
 ```
 
@@ -26,7 +26,7 @@ kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engin
 
 - now i want to access from outside wordl v1 which blue.
 ```
-wget https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/8-blue-green-deployment/blue-green-service.yml
+wget https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/8-blue-green-deployment/blue-green-service.yml
 
 ```
 - in the above file if app: blue is enabled then apply
