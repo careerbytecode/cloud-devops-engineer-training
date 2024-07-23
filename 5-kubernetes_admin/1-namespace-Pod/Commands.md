@@ -4,7 +4,7 @@ kubectl get ns
 ```
 - see below all the deault name spaces created initially as part any kubernets cluster creation
 ```
-rangarajbk_db@cloudshell:~$ kubectl get ns
+careerbytecode_db@cloudshell:~$ kubectl get ns
 NAME                 STATUS   AGE
 default              Active   5h14m
 gke-managed-system   Active   5h13m
@@ -45,12 +45,12 @@ kubectl get ns
 
 
 `````
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/namespace/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/namespace/namespace.yaml
 `````
 - to delete the namespace which created previously using namespace.yaml file
   
 `````
-kubectl delete -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/namespace/namespace.yaml
+kubectl delete -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/namespace/namespace.yaml
 `````
 *********************************************************************************
 ## 2.Create single pod using yaml file
@@ -62,7 +62,7 @@ kubectl create ns twitter
 - to create a pod using 1-singlepod.yaml file
   
 `````
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/1-singlepod.yml
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/1-singlepod.yml
 `````
 
 
@@ -88,13 +88,13 @@ kubectl exec -it pod/webserver bash -n twitter
 - now you need to understand that lablels will help you to create exact report and find the particular resources
   
 `````
-kubectl delete -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/1-singlepod.yml
+kubectl delete -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/1-singlepod.yml
 `````
 
 ************************************************************************************************
 ## 3.Create Multiple pod using yaml file
 ```
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/2-multipods.yml
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/2-multipods.yml
 ```
 - to see all resources in facebook namespace
 ```
@@ -120,14 +120,14 @@ kubectl exec -it pod/multicontainer-pods bash -n facebook -c web
 kubectl exec -it pod/multicontainer-pods bash -n facebook -c db
 `````
 `````
-kubectl delete -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/2-multipods.yml
+kubectl delete -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/2-multipods.yml
 `````
 ************************************************************************************************************************************
 ## 4.Create duplicate port in pod using yaml file
 - now we are going to create 1 pod and 2 container in facebook namespace
 
 `````
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/2.1-duplicate-port-multipod.yaml
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/2.1-duplicate-port-multipod.yaml
 `````
 
 -- same port it wont work.how to see ?
@@ -148,7 +148,7 @@ kubectl logs pod/multicontainer-pods -n facebook -c httpd1
 kubectl logs pod/multicontainer-pods -n facebook -c httpd2
 `````
 `````
-kubectl delete -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/2.1-duplicate-port-multipod.yaml
+kubectl delete -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/2.1-duplicate-port-multipod.yaml
 `````
 ***********************************************************************************************************************************
 
@@ -156,7 +156,7 @@ kubectl delete -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engi
 
 find out the below yaml file is deployed to which name space
 `````
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/6-example.yml -n facebook
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/6-example.yml -n facebook
 `````
 `````
 kubectl get all -n facebook
@@ -168,7 +168,7 @@ kubectl get pod/first-pod -n facebook
 kubectl describe pod first-pod -n facebook
 `````
 `````
-kubectl delete -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/6-example.yml -n facebook
+kubectl delete -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/6-example.yml -n facebook
 `````
 ********************************************************************************************
 ## 6. Deleting the namespace and pod 
