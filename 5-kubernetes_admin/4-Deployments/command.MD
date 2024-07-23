@@ -24,7 +24,7 @@ kubectl create ns facebook
 
 ## 3. Deploy the nginx:1.27.0-alpine
 ```
-wget https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/4-Deployments/deployments/1-deployment-facebook.yaml
+wget https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/4-Deployments/deployments/1-deployment-facebook.yaml
 ```
 ```
 kubectl apply -f 1-deployment-facebook.yaml
