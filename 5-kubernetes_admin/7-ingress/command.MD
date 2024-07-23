@@ -9,7 +9,7 @@
 - deploy hello-kubernetes-first.yaml
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/7-ingress/hello-kubernetes-first.yaml
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/7-ingress/hello-kubernetes-first.yaml
 ```
 
 ```
@@ -22,7 +22,7 @@ kubectl get all -o wide
 - deploy hello-kubernetes-second.yaml
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/7-ingress/hello-kubernetes-second.yaml 
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/7-ingress/hello-kubernetes-second.yaml 
 ```
 
 ```
@@ -66,7 +66,7 @@ kubectl --namespace default get services -o wide -w nginx-ingress-ingress-nginx-
 
 Exposing the App Using an Ingress
 ```
-kubectl apply -f https://raw.githubusercontent.com/rangarajbk/cloud-devops-engineer-training/main/5-kubernetes_admin/7-ingress/hello-kubernetes-ingress.yaml
+kubectl apply -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/7-ingress/hello-kubernetes-ingress.yaml
 ```
 You define an Ingress Resource with the name hello-kubernetes-ingress. Then, you specify two host rules, so that hw1.your_domain is routed to the hello-kubernetes-first Service, and hw2.your_domain is routed to the Service from the second deployment (hello-kubernetes-second).
 
