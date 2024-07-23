@@ -73,7 +73,7 @@ sudo apt-get install azure-cli
 ```
 
 ```
-Az login -t <tenant-id>
+az login
 ```
 
 for testing please issue the below command 
@@ -85,56 +85,62 @@ az group create --name DevResourceGroup --location eastus
 
 # Step 3 - Azure Container Registry
 
-Creating an Azure Container Registry (ACR) Instance
+- Creating an Azure Container Registry (ACR) Instance
+
+- To see what are all Azure resource Group List
+
 ```
-az group list  | grep -i name --> to see what are all Azure resource Group List
+az group list  | grep -i name 
 ```
-Create resource group 
+
+- Create resource group 
+
 ```
 az group create --name dev-ranga-bb-app --location eastus
 ```
 
-Create an Azure container registry under dev-ranga-bb-app RG group.
+- Create an Azure container registry under dev-ranga-bb-app RG group
+
 ```
 az acr create --resource-group dev-ranga-bb-app --name rangapublicrepo --sku Basic --admin-enabled true
 ```
-```
-az login
-```
-
+- to login into the azure private repo(Azure container registry)
 
 ```
 az acr login --name rangapublicrepo --resource-group dev-ranga-bb-app
 ```
 
+- Command to check the images avaialable 
 
 ```
 docker images
 ```
-now downloading the sample image microsoft repository
+
+- now downloading the sample image microsoft repository
 
 ```
 docker pull nginx
 ```
 
-Prepare your downloaded sample image towards Microsoft Repository standards 
+- Prepare your downloaded sample image towards Microsoft Repository standards 
 
 ```
 docker tag <your custom image> <ACRName>.azurecr.io/<imagenameofchoice>
 ```
-now in the above command replace like this below
+
+- now in the above command replace like this below
 
 ```
 docker tag nginx rangapublicrepo.azurecr.io/nginx:v1.0
 ```
 
-verify via docker images command
+- verify via docker images command
 
 ```
 docker images
 ```
 
-Push your customised Docker image which you created into ACR repository
+- Push your customised Docker image which you created into ACR repository
 
 ```
 docker push rangapublicrepo.azurecr.io/nginx:v1.0
