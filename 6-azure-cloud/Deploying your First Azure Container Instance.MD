@@ -28,9 +28,13 @@ sudo systemctl start docker
 
 sudo systemctl enable docker
 
-sudo gpasswd -a rangarajbk_db docker
+sudo gpasswd -a rangarajbk docker
 ```
 
+```
+docker info
+docker --version
+```
 
 ********************************************************
 
