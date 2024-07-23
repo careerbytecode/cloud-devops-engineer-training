@@ -1,4 +1,4 @@
-# Step1 
+# Step1 Creation of VM and Docker installation
 
 Create a Azure VM with the  ubuntu 22.04 image 
 
@@ -37,7 +37,7 @@ docker --version
 ```
 
 ********************************************************
-# Step 2 
+# Step 2 Installation of AZ cli in the Vm
 
 Get packages needed for the installation process:
 
