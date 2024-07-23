@@ -2,7 +2,7 @@
 
 Create a Azure VM with the  ubuntu 22.04 image 
 
-Docker Installation in UBUNTU 22.04
+Docker Installation in UBUNTU
 
 ```
 sudo apt-get update
@@ -30,7 +30,7 @@ sudo systemctl enable docker
 
 sudo gpasswd -a rangarajbk docker
 ```
-# To check the dcoker information and Version
+# To check the docker information and Version
 ```
 docker info
 docker --version
