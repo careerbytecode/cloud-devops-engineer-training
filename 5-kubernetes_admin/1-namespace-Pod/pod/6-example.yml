@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: first-pod
+  labels:
+    app: ranga
+spec:
+  containers:
+    - name: web-server
+      image: httpd
+      ports:
+        - containerPort: 80
+    - name: redis
+      image: redis
+      ports:
+        - containerPort: 6379

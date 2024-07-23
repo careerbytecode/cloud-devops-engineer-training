@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: httpd-replica
+  namespace: facebook
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      role: web
+    matchExpressions:
+      - {key: version, operator: In, values: [v1, v2, v3]}
+  template:
+    metadata:
+      name: web
+      labels:
+        role: web
+        version: v1
+        tier: frond
+    spec:
+      containers:
+      - name: web
+        image: httpd
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        volumeMounts:
+        - name: web
+          mountPath: /usr/local/apache2/htdocs/
+      - name: db
+        image: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: jino
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+        volumeMounts:
+        - name: dbmount
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: web
+        hostPath:
+          path: /opt
+          type: DirectoryOrCreate
+      - name: dbmount
+        hostPath:
+          path: /var/jino
+          type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+  namespace: facebook
+  labels:
+    role: web-service
+spec:
+  selector:
+    role: web
+  type: LoadBalancer
+  ports:
+  - port: 80

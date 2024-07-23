@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: httpd-replica
+  namespace: facebook
+spec:
+  replicas: 4
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      role: web
+    matchExpressions:
+      - {key: version, operator: In, values: [v1, v2, v3]}
+  template:
+    metadata:
+      name: web
+      labels:
+        role: web
+        version: v1
+        tier: frond
+    spec:
+      containers:
+      - name: web
+        image: httpd
+        ports:
+        - containerPort: 80
+          protocol: TCP
+

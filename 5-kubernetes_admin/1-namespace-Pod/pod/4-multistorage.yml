@@ -1,0 +1,39 @@
+---
+#single pod with single container attached with host storage
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db
+  namespace: facebook
+  labels:
+    app: postgres
+    tier: backend
+    version: master
+spec:
+  containers:
+  - name: db
+    image: postgres
+    env:
+      - name: POSTGRES_PASSWORD
+        value: Password@123
+    ports:
+      - containerPort: 5432
+    volumeMounts:
+      - name: pgdata
+        mountPath: /var/lib/postgresql/data
+  - name: web
+    image: nginx
+    ports:
+      - containerPort: 80
+    volumeMounts:
+      - name: webdata
+        mountPath: /usr/share/nginx/html/
+  volumes:
+  - name: pgdata
+    hostPath:
+      path: /var/lib/postgres
+      type: DirectoryOrCreate
+  - name: webdata
+    hostPath:
+      path: /var/www/html
+      type: DirectoryOrCreate

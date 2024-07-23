@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: facebook
+spec:
+  strategy:
+    type: RollingUpdate #Bydefault (RollingUpdate/Recreate)
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  revisionHistoryLimit: 10
+  paused: false
+  replicas: 3
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      role: webserver
+      jane: akil
+    matchExpressions:
+      - {key: version, operator: In, values: [v1, v2, v3]}
+  template:
+    metadata:
+      name: web
+      labels:
+        role: webserver
+        version: v3
+        tier: frond
+        jane: akil
+    spec:
+      containers:
+      - name: web
+        image: nginx:1.27.0-alpine
+        ports:
+        - containerPort: 80
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+  namespace: facebook
+  labels:
+    role: web-service
+spec:
+  selector:
+    role: webserver
+  type: LoadBalancer
+  ports:
+  - port: 80  

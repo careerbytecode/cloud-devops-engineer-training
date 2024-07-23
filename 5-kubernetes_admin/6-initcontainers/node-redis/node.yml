@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-server
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: node-server
+    image: rangarajbk/node-redis:v1.0
+    ports:
+    - containerPort: 8080
+  initContainers:
+  - name: init-myservice
+    image: rangarajbk/test:latest
+    args:
+    - sh
+    - -c
+    - while true; do STATUS=$(redis-cli -h redis-service -p 6379 ping); if [ $STATUS = "PONG" ]; then echo "Connected"; break; else echo "Not connected"; fi; sleep 10; done
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myservice
+spec:
+  selector:
+    app: myapp
+  ports:
+  - protocol: TCP
+    port: 8080
+  type: NodePort

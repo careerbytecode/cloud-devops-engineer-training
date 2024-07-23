@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-server
+spec:
+  strategy:
+    type: RollingUpdate #Bydefault (RollingUpdate/Recreate)
+  revisionHistoryLimit: 4
+  replicas: 1
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      role: cache-server
+  template:
+    metadata:
+      name: web
+      labels:
+        role: cache-server
+    spec:
+      containers:
+      - name: redis-server
+        image: redis
+        ports:
+        - containerPort: 6379
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  labels:
+    role: redis-service
+spec:
+  selector:
+    role: cache-server
+  type: ClusterIP
+  ports:
+  - port: 6379

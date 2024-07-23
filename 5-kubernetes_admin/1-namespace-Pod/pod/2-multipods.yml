@@ -1,0 +1,24 @@
+---
+#single pod with multiple container's
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multicontainer-pods
+  namespace: facebook
+  labels:
+    app: httpd
+    tier: frontend-backend
+    version: v1
+spec:
+  containers:
+  - name: web
+    image: httpd
+    ports:
+    - containerPort: 80
+  - name: db
+    image: mysql
+    ports:
+    - containerPort: 3306
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: ranga123

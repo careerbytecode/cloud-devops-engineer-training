@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replica
+  namespace: twitter
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      role: webserver
+    matchExpressions:
+      - {key: version, operator: In, values: [v1, v2, v3]}
+  template:
+    metadata:
+      name: web
+      labels:
+        role: webserver
+        version: v1
+        tier: frond-end
+    spec:
+      containers:
+      - name: web
+        image: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        volumeMounts:
+        - name: webdata
+          mountPath: /usr/share/nginx/html/
+      volumes:
+      - name: webdata
+        hostPath:
+          path: /mnt
+          type: DirectoryOrCreate

@@ -1,0 +1,17 @@
+---
+#single pod with single container attached with host storage
+apiVersion: v1
+kind: Pod
+metadata:
+  name: database1
+  namespace: twitter
+  labels:
+    app: psql
+    tier: backend
+    version: master
+spec:
+  containers:
+  - name: psql
+    image: nginx
+    ports:
+      - containerPort: 80

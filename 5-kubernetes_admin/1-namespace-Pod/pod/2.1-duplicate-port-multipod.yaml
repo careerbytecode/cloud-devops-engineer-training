@@ -1,0 +1,21 @@
+---
+#single pod with multiple container's
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multicontainer-pods
+  namespace: facebook
+  labels:
+    app: httpd
+    tier: frontend-backend
+    version: v1
+spec:
+  containers:
+  - name: httpd1
+    image: httpd
+    ports:
+    - containerPort: 80
+  - name: httpd2
+    image: httpd
+    ports:
+    - containerPort: 80
