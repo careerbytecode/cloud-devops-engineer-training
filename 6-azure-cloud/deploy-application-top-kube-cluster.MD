@@ -84,7 +84,7 @@ kubectl cluster-info
 Download Sample Application
 
 ```
-wget https://raw.githubusercontent.com/Azure-Samples/azure-voting-app-redis/master/azure-vote-all-in-one-redis.yaml
+wget https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/6-azure-cloud/azure-vote-all-in-one-redis.yaml
 ```
 
 
