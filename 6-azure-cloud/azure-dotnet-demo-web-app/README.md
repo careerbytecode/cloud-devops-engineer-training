@@ -1,5 +1,5 @@
 # azure-dotnet-demo-web-app
-**Create Test Dot.Net App**
+
 
 # Step1: Download and Install the .Net sdk 8 in your local  
 
