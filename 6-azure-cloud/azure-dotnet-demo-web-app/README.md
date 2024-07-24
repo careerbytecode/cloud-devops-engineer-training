@@ -29,10 +29,10 @@ dotnet publish -c Release -o ./publish
 
 **Or you can use the below test app which already available in github**
 
-https://github.com/cloudnloud/azure-dotnet-demo-web-app
+https://github.com/careerbytecode/cloud-devops-engineer-training/tree/main/6-azure-cloud/azure-dotnet-demo-web-app
 
-now go to portal.azure.com --> go to your web app --> go to deployment center  --> deploy the demo app using the belw link.
+- now go to portal.azure.com --> go to your web app --> go to deployment center  --> deploy the demo app using the belw link.
 
-https://github.com/cloudnloud/azure-dotnet-demo-web-app
+https://github.com/careerbytecode/cloud-devops-engineer-training/tree/main/6-azure-cloud/azure-dotnet-demo-web-app
 
-now access webapp url and see application is working..
+- now access webapp url and see application is working.
