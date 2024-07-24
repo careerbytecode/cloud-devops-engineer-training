@@ -149,7 +149,5 @@ docker push rangapublicrepo.azurecr.io/nginx:v1.0
 
 now we have pushed to azure container repository.
 
-goto azure console and go to azure container repository.
+goto azure console and go to azure container repository.The pushed image will be avaialable 
 
-
-look for this repo and right click the 3 dots and click launch instance from there.Once launched paste that conatiner machine ip address and you will see the web application.
