@@ -96,18 +96,18 @@ az group list  | grep -i name
 - Create resource group 
 
 ```
-az group create --name dev-ranga-bb-app --location eastus
+az group create --name careerbytecode-app --location eastus
 ```
 
-- Create an Azure container registry under dev-ranga-bb-app RG group
+- Create an Azure container registry under careerbytecode-app RG group
 
 ```
-az acr create --resource-group dev-ranga-bb-app --name rangapublicrepo --sku Basic --admin-enabled true
+az acr create --resource-group careerbytecode-app --name careerbytecoderepo --sku Basic --admin-enabled true
 ```
 - to login into the azure private repo(Azure container registry)
 
 ```
-az acr login --name rangapublicrepo --resource-group dev-ranga-bb-app
+az acr login --name careerbytecoderepo--resource-group careerbytecode-app
 ```
 
 - Command to check the images avaialable 
@@ -131,7 +131,7 @@ docker tag <your custom image> <ACRName>.azurecr.io/<imagenameofchoice>
 - now in the above command replace like this below
 
 ```
-docker tag nginx rangapublicrepo.azurecr.io/nginx:v1.0
+docker tag nginx careerbytecoderepo.azurecr.io/nginx:v1.0
 ```
 
 - verify via docker images command
@@ -143,7 +143,7 @@ docker images
 - Push your customised Docker image which you created into ACR repository
 
 ```
-docker push rangapublicrepo.azurecr.io/nginx:v1.0
+docker push careerbytecoderepo.azurecr.io/nginx:v1.0
 ```
 
 
