@@ -1,145 +1,134 @@
 # Kubernetes installation in ubuntu
 
 - Step 1: Create k8s cluster in 3 node lab setup (1 master & 2 worker node)
-- **create ubuntu 18.0 LTS machines like below**
+- You create master node + 2 worker nodes vm machine with ubuntu-2404-lts Operating system
 
-- Server --> 2 CPU, 4GB RAM
-- node1 --> 2 CPU, 4GB RAM
-- node2 --> 2 CPU, 4GB RAM
+- All 3 VM must have minimum 2 CPU + 4 gb memory
 
 
-- Server is going to be the kubenetes master
-- node1,node2 going to be Worker nodes
+----------------------------------------------------------------
 
-- in all the nodes run the following command
-
-
-
-- **Install Docker Engine (run all the nodes)**
----------------------
+- All these commands you execute it with Master node + 2 worker nodes
 
 ```
-apt-get update && apt-get install -y apt-transport-https curl
-```
+#!/bin/bash
 
-```
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-```
-```
-cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
-deb https://apt.kubernetes.io/ kubernetes-xenial main
+swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+overlay
+br_netfilter
 EOF
 ```
-```
-apt-get update
-```
-```
-apt-get install -y kubelet kubeadm kubectl 
-```
 
 ```
-apt-mark hold kubelet kubeadm kubectl 
+sudo modprobe overlay
+sudo modprobe br_netfilter
 ```
 
 
-# Install Docker packages (run all the nodes)
+```
+# sysctl params required by setup, params persist across reboots
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward                 = 1
+EOF
+```
 
 ```
-sudo apt-get remove docker docker-engine docker.io containerd runc
+# Apply sysctl params without reboot
+sudo sysctl --system
+```
+
+
+```
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+```
+
+```
+sudo mkdir -p -m 755 /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+```
+
+```
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 ```
 
 ```
 sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 ```
-sudo apt-get install     ca-certificates     curl     gnupg     lsb-release
-```
-
-```
-sudo mkdir -p /etc/apt/keyrings
-```
-
-```
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-```
-```
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
 ```
 sudo apt-get update
+sudo apt-get install containerd.io docker-ce docker-ce-cli docker-buildx-plugin docker-compose-plugin -y
 ```
 
 ```
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-```
-
-
-
-```
-mkdir -p /etc/systemd/system/docker.service.d
-```
-
-```
-systemctl daemon-reload
-systemctl restart docker
-systemctl enable docker
-```
-
-```
-docker -v
-```
-
-
-```
-rm /etc/containerd/config.toml
+mkdir -p /etc/containerd
+containerd config default | tee /etc/containerd/config.toml
+sed -e 's/SystemdCgroup = false/SystemdCgroup = true/g' -i /etc/containerd/config.toml
 systemctl restart containerd
-````
+systemctl enable containerd
+```
+
+```
+sudo systemctl status containerd
+```
+----------------------------------------------------------------------------------
 
 
-*********************************************************************************
-run this below command in only Server (Master node).coz we are going to make master machine as kube master
+## Run this only in master node 
 
 ```
 kubeadm init --apiserver-advertise-address $(hostname -i) --pod-network-cidr=192.168.0.0/16
 ```
 
-- you get the below in you output also from above command.
+
+- Note : Save the output in notepad.
 
 ```
-mkdir -p $HOME/.kube
+sudo mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
-export kubever=$(kubectl version | base64 | tr -d '\n')
 ```
 
-- https://www.weave.works/docs/net/latest/kubernetes/kube-addon/ (kube proxy addons installation)
-
+```
+export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 
-kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+```
+kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/calico.yaml
+```
+----------------------------------------------------------------------
+## Run this only in worker nodes
+```
+kubeadm join 172.31.33.189:6443 --token dl6nbv.g2kbrrem0tx6z6wh \
+        --discovery-token-ca-cert-hash sha256:9e2ed7d8d162d12e39e32ba768348976df7687e8bb79f12455c7c16d3d0f082b
 ```
 
-- verify:
 
-```
-kubectl get nodes
-````
+- Note :
 
+- 172.31.33.189:6443 --> this ipaddress will be changed according to your environment
 
-- now from node1 and node2 join to the k8s cluster 
-
-```
-kubectl get nodes 
-```
-
-- (this command output must show all nodes are ready status)
-
-**********************************************************************************************
-
+  
 ```
 watch -n 1 kubectl get nodes
 ```
