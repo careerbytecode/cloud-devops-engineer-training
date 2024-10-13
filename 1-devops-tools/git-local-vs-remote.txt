@@ -1,0 +1,77 @@
+To start this handson lab,you need following resources.
+
+1. Google cloud (or any other cloud or some VM's from your local machine).
+2. 2 linux machines - each linux machine should have CENTOS7 - 1 CPU/512 MB Memory
+
+if you are using cloud machines then first ensure direct ssh is enabled or not ?
+
+in both linux machines go to /etc/ssh/sshd_config file
+enable the following line
+
+PasswordAuthentication yes
+
+disable following line
+
+PasswordAuthentication no
+
+save this file
+
+run the below command
+
+systemctl restart sshd
+
+
+Linux Machine 1 name is - Server1
+Linux Machine 2 name is - Client 1
+
+
+*******************************************************************************************************************
+in linux machine 1 (Server1)
+
+yum install git -y
+mkdir -p /usr/opt/git1
+chmod -R 777 /usr/opt/git1
+git init --bare --shared /usr/opt/git1/safebox.git
+chmod -R 777 /usr/opt/git1
+useradd developer1
+passwd developer1
+su - developer1
+git clone /usr/opt/git1/safebox
+cd safebox
+touch flex.txt
+git add *
+git config --global  user.name 'developer1'
+git config --global user.email 'developer1@cloudnloud.com'
+git status
+git commit -m "you fail multiple times and then keep smash it"
+git push
+git config --global push.default simple
+git push
+
+
+go to Linux Machine2 (Client1) and run the following commands
+
+yum install git -y
+useradd developer2
+passwd developer2
+su - developer2
+git clone developer1@server1:/usr/opt/git1/safebox (please if you are using google cloud please use some user name rather root id.)
+cd safebox
+git pull
+
+************************************************************************************************************************
+
+in linux machine 1 itself create new another user
+useradd developer3
+
+su - developer3
+git clone /usr/opt/git1/safebox
+cd safebox
+cp /var/tmp/flex.txt .
+git config --global  user.name 'vijay'
+git config --global user.email 'vijay@cloudnloud.com'
+git config --global default.push simple
+git add package.pp
+git commit -m "dont sleep till you smash"
+git config --global default.push simple
+git push
