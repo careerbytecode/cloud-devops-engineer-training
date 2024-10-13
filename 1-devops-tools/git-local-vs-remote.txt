@@ -1,7 +1,7 @@
 To start this handson lab,you need following resources.
 
 1. Google cloud (or any other cloud or some VM's from your local machine).
-2. 2 linux machines - each linux machine should have CENTOS7 - 1 CPU/512 MB Memory
+2. 2 linux machines - each linux machine should have ubuntu - 1 CPU/512 MB Memory
 
 if you are using cloud machines then first ensure direct ssh is enabled or not ?
 
