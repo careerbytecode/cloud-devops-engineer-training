@@ -37,6 +37,7 @@ adduser developer1
 passwd developer1
 su - developer1
 git clone /usr/opt/git1/safebox
+git config --global --add safe.directory /usr/opt/git1/safebox.git
 cd safebox
 touch flex.txt
 git add *
