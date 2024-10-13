@@ -28,7 +28,7 @@ Linux Machine 2 name is - Client 1
 *******************************************************************************************************************
 in linux machine 1 (Server1)
 
-yum install git -y
+apt install git -y
 mkdir -p /usr/opt/git1
 chmod -R 777 /usr/opt/git1
 git init --bare --shared /usr/opt/git1/safebox.git
@@ -51,7 +51,7 @@ git push
 
 go to Linux Machine2 (Client1) and run the following commands
 
-yum install git -y
+apt install git -y
 useradd developer2
 passwd developer2
 su - developer2
