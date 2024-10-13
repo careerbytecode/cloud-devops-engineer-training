@@ -33,7 +33,7 @@ mkdir -p /usr/opt/git1
 chmod -R 777 /usr/opt/git1
 git init --bare --shared /usr/opt/git1/safebox.git
 chmod -R 777 /usr/opt/git1
-useradd developer1
+adduser developer1
 passwd developer1
 su - developer1
 git clone /usr/opt/git1/safebox
