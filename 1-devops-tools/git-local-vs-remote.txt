@@ -34,7 +34,6 @@ chmod -R 777 /usr/opt/git1
 git init --bare --shared /usr/opt/git1/safebox.git
 chmod -R 777 /usr/opt/git1
 adduser developer1
-passwd developer1
 su - developer1
 git clone /usr/opt/git1/safebox
 git config --global --add safe.directory /usr/opt/git1/safebox.git
@@ -53,8 +52,7 @@ git push
 go to Linux Machine2 (Client1) and run the following commands
 
 apt install git -y
-useradd developer2
-passwd developer2
+adduser developer2
 su - developer2
 git clone developer1@server1:/usr/opt/git1/safebox (please if you are using google cloud please use some user name rather root id.)
 cd safebox
