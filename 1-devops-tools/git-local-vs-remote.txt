@@ -41,7 +41,7 @@ cd safebox
 touch flex.txt
 git add *
 git config --global  user.name 'developer1'
-git config --global user.email 'developer1@cloudnloud.com'
+git config --global user.email 'developer1@careerbytecode.com'
 git status
 git commit -m "you fail multiple times and then keep smash it"
 git push
@@ -68,8 +68,8 @@ su - developer3
 git clone /usr/opt/git1/safebox
 cd safebox
 cp /var/tmp/flex.txt .
-git config --global  user.name 'vijay'
-git config --global user.email 'vijay@cloudnloud.com'
+git config --global  user.name 'careerbytecode'
+git config --global user.email 'learning@careerbytecode.com'
 git config --global default.push simple
 git add package.pp
 git commit -m "dont sleep till you smash"
