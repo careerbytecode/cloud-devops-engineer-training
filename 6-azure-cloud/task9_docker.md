@@ -74,6 +74,10 @@ sudo apt-get install azure-cli
 
 ```
 az login
+
+or
+
+az login --use-device-code
 ```
 
 for testing please issue the below command 
