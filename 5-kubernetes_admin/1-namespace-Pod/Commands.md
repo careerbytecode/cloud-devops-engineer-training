@@ -114,10 +114,12 @@ kubectl exec -it pod/multicontainer-pods bash -n facebook
 `````
 -
 `````
-kubectl exec -it pod/multicontainer-pods bash -n facebook -c web
+kubectl exec -it pod/multicontainer-pods -n facebook -c web -- bash
+
 `````
 `````
-kubectl exec -it pod/multicontainer-pods bash -n facebook -c db
+kubectl exec -it pod/multicontainer-pods -n facebook -c db -- bash
+
 `````
 `````
 kubectl delete -f https://raw.githubusercontent.com/careerbytecode/cloud-devops-engineer-training/main/5-kubernetes_admin/1-namespace-Pod/pod/2-multipods.yml
