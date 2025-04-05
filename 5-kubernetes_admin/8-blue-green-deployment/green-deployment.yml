@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: green-container
-          image: nginx
+          image: nileshgule/blue-green-demo:green
           resources:
             requests:
               cpu: "10m" #1% of a core
