@@ -31,23 +31,37 @@ vi /etc/hosts
 
 ## SSH connection need to be enabled if you are using cloud machines
 
-in all 3 machines go to /etc/ssh/sshd_config file using vim editor.
+## Step 1: SSH Configuration
+## Ensure SSH Access: Make sure direct SSH access is enabled on both machines.
 
+## For Google Cloud (GCP):
+## Update the SSH configuration file on both machines.
 ```
-vim /etc/ssh/sshd_config
+sudo vim /etc/ssh/sshd_config
 ```
+## Ensure these lines are present:
 ```
 PasswordAuthentication yes
-
 ChallengeResponseAuthentication yes
-
-````
-
-In all 3 machines now you restart sshd service
 ```
-systemctl restart sshd
+## Save and exit the file, then restart SSH service:
 ```
-
+sudo service sshd restart
+```
+## For Azure Cloud (Ubuntu VM):
+Update the SSH configuration file.
+```
+sudo vim /etc/ssh/sshd_config
+```
+## Ensure these lines are present:
+```
+PasswordAuthentication yes
+KbdInteractiveAuthentication yes
+```
+## Save and exit the file, then restart SSH service:
+```
+sudo service sshd restart
+```
 ## Create user called ansible in all machines
 ```
 adduser ansible
