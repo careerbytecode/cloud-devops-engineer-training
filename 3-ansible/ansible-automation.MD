@@ -46,7 +46,7 @@ ChallengeResponseAuthentication yes
 ```
 ## Save and exit the file, then restart SSH service:
 ```
-sudo service sshd restart
+sudo service ssh restart
 ```
 ## For Azure Cloud (Ubuntu VM):
 Update the SSH configuration file.
@@ -60,7 +60,7 @@ KbdInteractiveAuthentication yes
 ```
 ## Save and exit the file, then restart SSH service:
 ```
-sudo service sshd restart
+sudo service ssh restart
 ```
 ## Create user called ansible in all machines
 ```
