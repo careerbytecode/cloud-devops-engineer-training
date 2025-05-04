@@ -1,0 +1,149 @@
+Before start this excercise,you must have running k8s cluster in AWS cloud or Google cloud or Azure Cloud.
+
+Step 1:  Download sample application
+Step 2:  Deploy and use Docker Container Registry
+Step 3:  Run applications in Kubernetes Service
+Step 4:  Scale applications in Kubernetes Service
+Step 5: Autoscale pods
+Step 6: Update an application in Kubernetes Service
+
+**************************************************************************************************************************************
+
+Step 1: Download sample application
+
+apt install tree -y
+
+git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
+
+cd azure-voting-app-redis
+
+export CLOUDSDK_PYTHON=python2
+
+docker-compose up -d
+
+docker images
+
+
+*******************************************************************************************************************
+
+Step 2: Deploy and use Docker Container Registry
+
+goto hub.docker.com and create new repository called azure-vote-front
+
+so now cloudnloud/azure-vote-front
+
+is ready
+
+docker login
+
+
+docker images
+
+
+docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 cloudnloud/azure-vote-front:v1
+
+
+docker images
+
+docker push cloudnloud/azure-vote-front:v1
+
+check hub.docker.com under azure-vote-front repo
+
+***************************************************************************************************************************************************************************************************************************
+
+Step 3: Run applications in  Kubernetes Service
+
+
+vi azure-vote-all-in-one-redis.yaml
+
+containers:
+- name: azure-vote-front
+  image: cloudnloud/azure-vote-front:v1
+  
+
+kubectl apply -f azure-vote-all-in-one-redis.yaml
+
+kubectl get service azure-vote-front --watch
+
+from the above command output get the EXTERNAL-IP and access it from browser
+
+
+**************************************************************************************************************************************
+
+Step 4: Scale applications in Kubernetes Service
+
+in another putty window run the following command
+
+watch -n 1 kubectl get all -o wide
+
+in another putty window run the below commands
+
+kubectl get pods
+
+kubectl scale --replicas=2 deployment/azure-vote-front
+
+kubectl scale --replicas=4 deployment/azure-vote-front
+
+
+*******************************************************************************************************************
+
+Step 5: Autoscale pods
+
+now open 3 putty window and do the following
+
+
+in another putty window run the following command
+
+watch -n 1 kubectl get hpa -o wide
+
+in another putty window run the following command
+
+watch -n 1 kubectl get all -o wide
+
+in another putty window run the following command
+
+kubectl autoscale deployment azure-vote-front --cpu-percent=50 --min=2 --max=10
+
+
+wait for 10 mins and you can see azure-vote-front pod now came down to 2 
+
+
+
+
+*******************************************************************************************************************
+
+Step 6: Update an application in  Kubernetes Service
+
+make some change in application
+
+
+vi azure-vote/azure-vote/config_file.cfg
+
+# UI Configurations
+TITLE = 'Azure Voting App'
+VOTE1VALUE = 'Blue'
+VOTE2VALUE = 'Purple'
+SHOWHOST = 'false'
+
+docker-compose up --build -d
+
+docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 cloudnloud/azure-vote-front:v2
+
+docker push cloudnloud/azure-vote-front:v2
+
+
+
+kubectl scale --replicas=3 deployment/azure-vote-front
+
+
+
+kubectl set image deployment azure-vote-front azure-vote-front=cloudnloud/azure-vote-front:v2
+
+run kubectl get service azure-vote-front command
+
+now access 20.72.185.232 (external ip) in browser
+
+you will see Blue,Purple,
+
+**************************************************************************************************************************************
+
